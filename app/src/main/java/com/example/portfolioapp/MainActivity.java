@@ -2,9 +2,7 @@ package com.example.portfolioapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,8 +25,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    private Button btnSignOut;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     SignInButton signInButton;
@@ -48,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.sign_in_button); // button to sign in
         mAuth = FirebaseAuth.getInstance();
-        btnSignOut = findViewById(R.id.sign_out_button); // button to sign out
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -57,12 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         signInButton.setOnClickListener(v -> signIn());
 
-        btnSignOut.setOnClickListener(v -> {
-            mGoogleSignInClient.signOut();
-            Toast.makeText(MainActivity.this, "You are Logged Out", Toast.LENGTH_SHORT).show();
-            btnSignOut.setVisibility(View.INVISIBLE);
-            signInButton.setVisibility(View.VISIBLE);
-        });
     }
 
     // called automatically when activity starts after onCreate
@@ -71,8 +59,24 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         final FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser != null) {
-            updateUI(currentUser); // updates the UI for the signed in users
+            DocumentReference usersRef;
+            usersRef = db.collection("users").document(Objects.requireNonNull(currentUser.getEmail()));
+            usersRef.get().addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    DocumentSnapshot docSnap = task.getResult();
+                    assert docSnap != null;
+                    if(docSnap.exists()){
+                        startActivity(new Intent(MainActivity.this, HomePage.class));
+                    }
+                    else{
+                        mAuth.signOut();
+                        mGoogleSignInClient.signOut().addOnCompleteListener(task1 -> {
+                        });
+                    }
+                }
+            });
         }
     }
 
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
+            assert acc != null;
             FirebaseGoogleAuth(acc);
         } catch (ApiException e) {
             Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
@@ -105,26 +110,7 @@ public class MainActivity extends AppCompatActivity {
         AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(authCredential).addOnCompleteListener(this, task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(MainActivity.this, "Signed In Successfully", Toast.LENGTH_SHORT).show();
                 FirebaseUser user = mAuth.getCurrentUser();
-                Map<String, String> data = new HashMap<>();
-                assert user != null;
-                data.put("Email", user.getEmail());
-                data.put("Name", user.getDisplayName());
-                data.put("ImageUrl", "");
-
-                DocumentReference userRef = db.collection("users").document(Objects.requireNonNull(user.getEmail()));
-                userRef.get().addOnCompleteListener(task1 -> {
-                    if (task1.isSuccessful()) {
-                        DocumentSnapshot document = task1.getResult();
-                        assert document != null;
-                        if (!document.exists()) {
-                            db.collection("users").document(Objects.requireNonNull(user.getEmail())).set(data);
-                        }
-                    } else {
-                        db.collection("users").document(Objects.requireNonNull(user.getEmail())).set(data);
-                    }
-                });
                 updateUI(user);
             } else {
                 Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
@@ -137,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
         if (fUser != null) {
             String personEmail = fUser.getEmail();
             Toast.makeText(MainActivity.this, personEmail, Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(this, HomePage.class);
-//            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, RegistrationPage.class));
         }
     }
+
 }
 
 
