@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     else{
                         mAuth.signOut();
                         mGoogleSignInClient.signOut().addOnCompleteListener(task1 -> {
+                            finish();
                         });
                     }
                 }
@@ -123,7 +124,21 @@ public class MainActivity extends AppCompatActivity {
         if (fUser != null) {
             String personEmail = fUser.getEmail();
             Toast.makeText(MainActivity.this, personEmail, Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, RegistrationPage.class));
+
+            DocumentReference usersRef;
+            usersRef = db.collection("users").document(Objects.requireNonNull(personEmail));
+            usersRef.get().addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    DocumentSnapshot docSnap = task.getResult();
+                    assert docSnap != null;
+                    if(docSnap.exists()){
+                        startActivity(new Intent(MainActivity.this, HomePage.class));
+                    }
+                    else{
+                        startActivity(new Intent(MainActivity.this, RegistrationPage.class));
+                    }
+                }
+            });
         }
     }
 
