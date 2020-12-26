@@ -39,6 +39,7 @@ public class EditProfile extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
 
     Map<String, Object> data;
+
     int count=0;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
