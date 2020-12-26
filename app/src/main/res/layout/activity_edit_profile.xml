@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilePage">
+    tools:context=".EditProfile">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,14 +21,14 @@
             android:gravity="center_horizontal"
             android:text="Name:"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/profile_name"
+        <EditText
+            android:id="@+id/edited_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -38,8 +37,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:autofillHints="name"
+            android:hint="name"
+            android:inputType="text"
             android:maxLength="15"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,14 +52,14 @@
             android:gravity="center_horizontal"
             android:text="Email:"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/profile_email"
+            android:id="@+id/edited_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -66,7 +67,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,14 +79,14 @@
             android:gravity="center_horizontal"
             android:text="Organization Name:"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/profile_organization_name"
+        <EditText
+            android:id="@+id/edited_organization_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -93,7 +94,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="18sp" />
+            android:hint="college name"
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,14 +108,14 @@
             android:gravity="center_horizontal"
             android:text="LinkedIn Profile:"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/profile_linkedin"
+        <EditText
+            android:id="@+id/edited_linkedin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -120,7 +123,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="18sp" />
+            android:hint="url"
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,11 +133,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
             android:text="Please keep your linkedin profile updated with all certificates and previous projects done."
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,60 +152,101 @@
             android:gravity="center_horizontal"
             android:text="Proficiency:"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/profile_proficiency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="None"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:fontFamily="sans-serif-black"
-            android:gravity="center_horizontal"
-            android:text="ID Card:"
+            android:layout_marginTop="5dp"
+            android:text="Select those apply"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="14sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/profile_id"
-            android:layout_width="300dp"
-            android:layout_height="260dp"
+        <CheckBox
+            android:id="@+id/edited_android_java"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            tools:ignore="ContentDescription"
-            android:src="@mipmap/baseline_account_circle_black_36"/>
+            android:text="App Developement - Java/Kotlin"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_android_flutter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="App Developement - Flutter"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_android_react"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="App Developement - React"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_web_django"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Web Developement - Django"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_web_nodejs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Web Developement - NodeJs"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_web_frontend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Web Developement - Frontend"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_opencv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="OpenCV"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/edited_nlp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="NLP"
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/update"
+            android:id="@+id/edit_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="85dp"
@@ -210,8 +254,10 @@
             android:layout_marginRight="85dp"
             android:layout_marginBottom="50dp"
             android:background="@color/teal_200"
-            android:text="UPDATE"
-            android:textSize="23sp" />
+            android:text="SAVE"
+            android:textSize="26sp" />
+
 
     </LinearLayout>
+
 </ScrollView>

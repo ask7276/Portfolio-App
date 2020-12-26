@@ -61,6 +61,7 @@ public class RegistrationPage extends AppCompatActivity {
     public Uri mImageUri;
     private StorageReference mStorageRef;
 
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class RegistrationPage extends AppCompatActivity {
         personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mStorageRef = FirebaseStorage.getInstance().getReference("ProfilePhotos");
         email.setText(mAuth.getCurrentUser().getEmail());
 
         select_image.setOnClickListener(v -> openFileChooser());
@@ -130,15 +131,62 @@ public class RegistrationPage extends AppCompatActivity {
         }
     }
 
+    Map<String, Boolean> check = new HashMap<>();
+
+    private boolean checking() {
+        check.put("App Developement - Java/Kotlin", false);
+        check.put("App Developement - Flutter", false);
+        check.put("App Developement - React", false);
+        check.put("Web Developement - Django", false);
+        check.put("Web Developement - NodeJs", false);
+        check.put("Web Developement - Frontend", false);
+        check.put("OpenCV", false);
+        check.put("NLP", false);
+        if (c1.isChecked()) {
+            check.put("App Developement - Java/Kotlin", true);
+            count++;
+        }
+        if (c2.isChecked()) {
+            check.put("App Developement - Flutter", true);
+            count++;
+        }
+        if (c3.isChecked()) {
+            check.put("App Developement - React", true);
+            count++;
+        }
+        if (c4.isChecked()) {
+            check.put("Web Developement - Django", true);
+            count++;
+        }
+        if (c5.isChecked()) {
+            check.put("Web Developement - NodeJs", true);
+            count++;
+        }
+        if (c6.isChecked()) {
+            check.put("Web Developement - Frontend", true);
+            count++;
+        }
+        if (c7.isChecked()) {
+            check.put("OpenCV", true);
+            count++;
+        }
+        if (c8.isChecked()) {
+            check.put("NLP", true);
+            count++;
+        }
+        return count != 0;
+    }
 
     public void uploadFile() {
-        if (mImageUri != null) {
+        if (checking() && mImageUri != null && !name.getText().toString().equals("") && !org_name.getText().toString().equals("") &&
+                !linkedin.getText().toString().equals("")) {
+
             String personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
             assert personEmail != null;
             StorageReference fileReference = mStorageRef.child(personEmail);
             fileReference.putFile(mImageUri)
                     .addOnSuccessListener(taskSnapshot -> {
-                        StorageReference downloadUriRef = FirebaseStorage.getInstance().getReference("uploads").child(personEmail);
+                        StorageReference downloadUriRef = FirebaseStorage.getInstance().getReference("ProfilePhotos").child(personEmail);
                         Task<Uri> downloadUriTask = downloadUriRef.getDownloadUrl();
                         while (!downloadUriTask.isSuccessful()) ;
                         Uri downloadUri = downloadUriTask.getResult();
@@ -150,46 +198,16 @@ public class RegistrationPage extends AppCompatActivity {
                         mdata.put("Email", email.getText().toString());
                         mdata.put("Organisation Name", org_name.getText().toString());
                         mdata.put("LinkedIn", linkedin.getText().toString());
-                        Map<String, Boolean> check = new HashMap<>();
-                        check.put("App Developement - Java/Kotlin", false);
-                        check.put("App Developement - Flutter", false);
-                        check.put("App Developement - React", false);
-                        check.put("Web Developement - Django", false);
-                        check.put("Web Developement - NodeJs", false);
-                        check.put("Web Developement - Frontend", false);
-                        check.put("OpenCV", false);
-                        check.put("NLP", false);
-                        if (c1.isChecked()) {
-                            check.put("App Developement - Java/Kotlin", true);
-                        }
-                        if (c2.isChecked()) {
-                            check.put("App Developement - Flutter", true);
-                        }
-                        if (c3.isChecked()) {
-                            check.put("App Developement - React", true);
-                        }
-                        if (c4.isChecked()) {
-                            check.put("Web Developement - Django", true);
-                        }
-                        if (c5.isChecked()) {
-                            check.put("Web Developement - NodeJs", true);
-                        }
-                        if (c6.isChecked()) {
-                            check.put("Web Developement - Frontend", true);
-                        }
-                        if (c7.isChecked()) {
-                            check.put("OpenCV", true);
-                        }
-                        if (c8.isChecked()) {
-                            check.put("NLP", true);
-                        }
                         mdata.put("checkboxes", check);
-                        mdata.put("ImgaeUrl", url);
+                        mdata.put("ImageUrl", url);
                         db.collection("users").document(personEmail).set(mdata);
                         Toast.makeText(RegistrationPage.this, "Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegistrationPage.this, HomePage.class));
                     })
                     .addOnFailureListener(e -> Toast.makeText(RegistrationPage.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        } else {
+            Toast.makeText(RegistrationPage.this, "Fill all the fields and select atleast one proficiency", Toast.LENGTH_SHORT).show();
         }
     }
 }
