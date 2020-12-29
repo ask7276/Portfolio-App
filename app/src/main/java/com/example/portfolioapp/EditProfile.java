@@ -141,32 +141,32 @@ public class EditProfile extends AppCompatActivity implements NavigationView.OnN
 
     Map<String, Boolean> check = new HashMap<>();
     private boolean checking(){
-        check.put("App Developement - Java/Kotlin", false);
-        check.put("App Developement - Flutter", false);
-        check.put("App Developement - React", false);
-        check.put("Web Developement - Django", false);
-        check.put("Web Developement - NodeJs", false);
-        check.put("Web Developement - Frontend", false);
+        check.put("Java/Kotlin", false);
+        check.put("Flutter", false);
+        check.put("React Native", false);
+        check.put("Django", false);
+        check.put("NodeJs", false);
+        check.put("ReactJs", false);
         check.put("OpenCV", false);
         check.put("NLP", false);
         if (c1.isChecked()) {
-            check.put("App Developement - Java/Kotlin", true);
+            check.put("Java/Kotlin", true);
             count++;
         }
         if (c2.isChecked()) {
-            check.put("App Developement - Flutter", true);count++;
+            check.put("Flutter", true);count++;
         }
         if (c3.isChecked()) {
-            check.put("App Developement - React", true);count++;
+            check.put("React Native", true);count++;
         }
         if (c4.isChecked()) {
-            check.put("Web Developement - Django", true);count++;
+            check.put("Django", true);count++;
         }
         if (c5.isChecked()) {
-            check.put("Web Developement - NodeJs", true);count++;
+            check.put("NodeJs", true);count++;
         }
         if (c6.isChecked()) {
-            check.put("Web Developement - Frontend", true);count++;
+            check.put("ReactJs", true);count++;
         }
         if (c7.isChecked()) {
             check.put("OpenCV", true);count++;

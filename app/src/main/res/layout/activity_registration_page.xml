@@ -179,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="App Developement - Java/Kotlin"
+            android:text="Java/Kotlin"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 
@@ -188,7 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="App Developement - Flutter"
+            android:text="Flutter"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 
@@ -197,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="App Developement - React"
+            android:text="React Native"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 
@@ -206,7 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Web Developement - Django"
+            android:text="Django"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 
@@ -215,7 +215,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Web Developement - NodeJs"
+            android:text="NodeJs"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 
@@ -224,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Web Developement - Frontend"
+            android:text="ReactJs"
             android:textSize="20sp"
             android:layout_marginStart="20dp" />
 

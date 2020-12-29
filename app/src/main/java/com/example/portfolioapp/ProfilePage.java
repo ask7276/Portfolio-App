@@ -106,11 +106,11 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
                     assert check != null;
                     check.forEach((k, v) -> {
                         if (v == (Boolean) true) {
-                            prof[0] = prof[0] + "," + k.toString();
+                            prof[0] = prof[0] + ", " + k.toString();
                         }
                     });
                     if (!prof[0].equals("")) {
-                        prof[0] = prof[0].substring(1);
+                        prof[0] = prof[0].substring(2);
                         proficiency.setText(prof[0]);
                     }
                     String img = Objects.requireNonNull(data.get("ImageUrl")).toString();
