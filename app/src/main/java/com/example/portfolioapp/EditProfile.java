@@ -13,11 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     EditText name,org_name, linkedin;
     CheckBox c1, c2,c3, c4,c5, c6,c7,c8;
@@ -42,11 +47,26 @@ public class EditProfile extends AppCompatActivity {
 
     int count=0;
 
+    private DrawerLayout drawer;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.nav_activity_edit_profile);
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         name = findViewById(R.id.edited_name);
         email = findViewById(R.id.edited_email);
@@ -177,5 +197,33 @@ public class EditProfile extends AppCompatActivity {
         else{
             Toast.makeText(EditProfile.this, "Select atleast one proficiency", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_home) {
+            startActivity(new Intent(EditProfile.this, HomePage.class));
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (item.getItemId() == R.id.nav_profile) {
+            startActivity(new Intent(EditProfile.this, ProfilePage.class));
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (item.getItemId() == R.id.nav_faq) {
+            startActivity(new Intent(EditProfile.this, FaqPage.class));
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (item.getItemId() == R.id.nav_logout) {
+            mAuth.signOut();
+            mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                    task -> {
+                        Toast.makeText(EditProfile.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(EditProfile.this, MainActivity.class));
+                    }
+            );
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        return true;
     }
 }

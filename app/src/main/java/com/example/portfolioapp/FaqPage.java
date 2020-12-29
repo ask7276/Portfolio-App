@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -19,16 +18,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class FaqPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
     private DrawerLayout drawer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_home_page);
+        setContentView(R.layout.nav_activity_faq_page);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,7 +34,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(2).setChecked(true);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -46,54 +44,30 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_file, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (item.getItemId() == R.id.sign_out_button) {
-            mAuth.signOut();
-            mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                    task -> {
-                        Toast.makeText(HomePage.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(HomePage.this, MainActivity.class));
-                    }
-            );
-        } else if (item.getItemId() == R.id.user_profile_button) {
-            startActivity(new Intent(HomePage.this, ProfilePage.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {
-            startActivity(new Intent(HomePage.this, HomePage.class));
+            startActivity(new Intent(FaqPage.this, HomePage.class));
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (item.getItemId() == R.id.nav_profile) {
-            startActivity(new Intent(HomePage.this, ProfilePage.class));
+            startActivity(new Intent(FaqPage.this, ProfilePage.class));
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (item.getItemId() == R.id.nav_faq) {
-            startActivity(new Intent(HomePage.this, FaqPage.class));
+            startActivity(new Intent(FaqPage.this, FaqPage.class));
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (item.getItemId() == R.id.nav_logout) {
             mAuth.signOut();
             mGoogleSignInClient.signOut().addOnCompleteListener(this,
                     task -> {
-                        Toast.makeText(HomePage.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FaqPage.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
                         finish();
-                        startActivity(new Intent(HomePage.this, MainActivity.class));
+                        startActivity(new Intent(FaqPage.this, MainActivity.class));
                     }
             );
             drawer.closeDrawer(GravityCompat.START);
