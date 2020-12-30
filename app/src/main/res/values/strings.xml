@@ -7,4 +7,7 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">All Projects</string>
+    <string name="tab_text_2">Projects by You</string>
 </resources>
