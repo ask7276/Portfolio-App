@@ -12,12 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.portfolioapp.ui.main.SectionsPagerAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
     private DrawerLayout drawer;
+
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs2);
         tabs.setupWithViewPager(viewPager);
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(v -> {
+            startActivity(new Intent(HomePage.this,NewProject.class));
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

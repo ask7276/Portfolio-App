@@ -95,7 +95,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
                 if (docSnap.exists()) {
                     data = docSnap.getData();
                     assert data != null;
-                    name.setText("Hi "+ Objects.requireNonNull(data.get("Name")).toString());
+                    name.setText("Hi " + Objects.requireNonNull(data.get("Name")).toString());
                     email.setText(Objects.requireNonNull(data.get("Email")).toString());
                     linkedin.setText(Objects.requireNonNull(data.get("LinkedIn")).toString());
                     org_name.setText(Objects.requireNonNull(data.get("Organisation Name")).toString());
@@ -167,16 +167,13 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         if (item.getItemId() == R.id.nav_home) {
             startActivity(new Intent(ProfilePage.this, HomePage.class));
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (item.getItemId() == R.id.nav_profile) {
+        } else if (item.getItemId() == R.id.nav_profile) {
             startActivity(new Intent(ProfilePage.this, ProfilePage.class));
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (item.getItemId() == R.id.nav_faq) {
+        } else if (item.getItemId() == R.id.nav_faq) {
             startActivity(new Intent(ProfilePage.this, FaqPage.class));
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (item.getItemId() == R.id.nav_logout) {
+        } else if (item.getItemId() == R.id.nav_logout) {
             mAuth.signOut();
             mGoogleSignInClient.signOut().addOnCompleteListener(this,
                     task -> {
