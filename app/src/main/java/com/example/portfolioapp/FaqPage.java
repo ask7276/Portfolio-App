@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,14 +17,27 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class FaqPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
     private DrawerLayout drawer;
+
+    FirebaseFirestore db;
+    RecyclerView mRecyclerView;
+    ArrayList<User> userArrayList;
+    MyRecyclerViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +60,48 @@ public class FaqPage extends AppCompatActivity implements NavigationView.OnNavig
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+
+        userArrayList = new ArrayList<>();
+        setUpRecyclerView();
+        setupFirebase();
+        loadfromFirebase();
+
+    }
+
+    private void loadfromFirebase() {
+        if (userArrayList.size()>0)
+            userArrayList.clear();
+
+        db.collection("projects")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for(DocumentSnapshot querySnapshot : task.getResult()){
+                            User user = new User(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
+                            userArrayList.add(user);
+                        }
+                        adapter = new MyRecyclerViewAdapter(FaqPage.this, userArrayList);
+                        mRecyclerView.setAdapter(adapter);
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(FaqPage.this, "fbrefg", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void setupFirebase() {
+        db = FirebaseFirestore.getInstance();
+    }
+
+    private void setUpRecyclerView() {
+        mRecyclerView = findViewById(R.id.mRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

@@ -16,8 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PortfolioApp">
-        <activity android:name=".NewProject"
-            android:theme="@style/Theme.PortfolioApp.NoActionBar"/>
+        <activity
+            android:name=".EditProject"
+            android:theme="@style/Theme.PortfolioApp.NoActionBar" />
+        <activity
+            android:name=".ApplicantsList"
+            android:theme="@style/Theme.PortfolioApp.NoActionBar" />
+        <activity
+            android:name=".ProjectInfo"
+            android:theme="@style/Theme.PortfolioApp.NoActionBar" />
+        <activity
+            android:name=".NewProject"
+            android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
             android:name=".FaqPage"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />

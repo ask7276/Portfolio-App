@@ -198,12 +198,12 @@ public class NewProject extends AppCompatActivity implements NavigationView.OnNa
         if (!title.getText().toString().equals("") && !email.getText().toString().equals("") && !org_team.getText().toString().equals("") &&
                 !desc.getText().toString().equals("") && !perks.getText().toString().equals("") && !members.getText().toString().equals("") && checking()) {
             Map<String, Object> mdata = new HashMap<>();
-            mdata.put("Project Title", title.getText().toString());
+            mdata.put("Title", title.getText().toString());
             mdata.put("Email", email.getText().toString());
-            mdata.put("Organizing Team", org_team.getText().toString());
+            mdata.put("Team", org_team.getText().toString());
             mdata.put("Description", desc.getText().toString());
             mdata.put("Perks", perks.getText().toString());
-            mdata.put("Existing Team Members", members.getText().toString());
+            mdata.put("Members", members.getText().toString());
             mdata.put("Checkboxes", check);
             mdata.put("Owner", mAuth.getCurrentUser().getEmail());
             db.collection("projects").document(email.getText().toString() + " " + title.getText().toString()).set(mdata);
