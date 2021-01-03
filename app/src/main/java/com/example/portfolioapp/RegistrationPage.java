@@ -1,12 +1,10 @@
 package com.example.portfolioapp;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,37 +29,22 @@ import java.util.Objects;
 
 public class RegistrationPage extends AppCompatActivity {
 
-    EditText name;
-    EditText org_name;
-    EditText linkedin;
-
-    CheckBox c1;
-    CheckBox c2;
-    CheckBox c3;
-    CheckBox c4;
-    CheckBox c5;
-    CheckBox c6;
-    CheckBox c7;
-    CheckBox c8;
-
-    Button select_image;
-    Button submit_button;
-
-    TextView email;
-    TextView image_name;
+    private EditText name, org_name, linkedin;
+    private CheckBox c1, c2, c3, c4, c5, c6, c7, c8;
+    Button select_image, submit_button;
+    private TextView email, image_name;
 
     String personEmail;
-    private static final int PICK_IMAGE_REQUEST = 1;
-
     String url = "";
+    private static final int PICK_IMAGE_REQUEST = 1;
+    int count = 0;
+    Map<String, Boolean> check = new HashMap<>();
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
     public Uri mImageUri;
     private StorageReference mStorageRef;
-
-    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +72,6 @@ public class RegistrationPage extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
         personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -99,14 +81,13 @@ public class RegistrationPage extends AppCompatActivity {
         select_image.setOnClickListener(v -> openFileChooser());
 
         submit_button.setOnClickListener(v -> uploadFile());
-
     }
 
-    private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-    }
+//    private String getFileExtension(Uri uri) {
+//        ContentResolver cR = getContentResolver();
+//        MimeTypeMap mime = MimeTypeMap.getSingleton();
+//        return mime.getExtensionFromMimeType(cR.getType(uri));
+//    }
 
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -124,14 +105,12 @@ public class RegistrationPage extends AppCompatActivity {
             mImageUri = data.getData();
             Cursor returnCursor =
                     getContentResolver().query(mImageUri, null, null, null, null);
-            int a = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            int name_col = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
             returnCursor.moveToFirst();
-            image_name.setText(returnCursor.getString(a));
+            image_name.setText(returnCursor.getString(name_col));
             returnCursor.close();
         }
     }
-
-    Map<String, Boolean> check = new HashMap<>();
 
     private boolean checking() {
         check.put("Java/Kotlin", false);
@@ -181,7 +160,6 @@ public class RegistrationPage extends AppCompatActivity {
         if (checking() && mImageUri != null && !name.getText().toString().equals("") && !org_name.getText().toString().equals("") &&
                 !linkedin.getText().toString().equals("")) {
 
-            String personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
             assert personEmail != null;
             StorageReference fileReference = mStorageRef.child(personEmail);
             fileReference.putFile(mImageUri)

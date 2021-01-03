@@ -28,30 +28,30 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
+
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    SignInButton signInButton;
+    private SignInButton signInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        signInButton = findViewById(R.id.sign_in_button); // button to sign in
-        mAuth = FirebaseAuth.getInstance();
+        signInButton = findViewById(R.id.sign_in_button);
 
+        // google initializations
+        mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signInButton.setOnClickListener(v -> signIn());
-
     }
 
-    // called automatically when activity starts after onCreate
     @Override
     public void onStart() {
         super.onStart();
@@ -62,16 +62,19 @@ public class MainActivity extends AppCompatActivity {
             DocumentReference usersRef;
             usersRef = db.collection("users").document(Objects.requireNonNull(currentUser.getEmail()));
             usersRef.get().addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot docSnap = task.getResult();
                     assert docSnap != null;
-                    if(docSnap.exists()){
+                    if (docSnap.exists()) {
                         startActivity(new Intent(MainActivity.this, HomePage.class));
-                    }
-                    else{
+                    } else {
                         mAuth.signOut();
                         mGoogleSignInClient.signOut().addOnCompleteListener(task1 -> finish());
                     }
+                } else {
+                    mAuth.signOut();
+                    mGoogleSignInClient.signOut().addOnCompleteListener(task1 -> finish());
+                    Toast.makeText(MainActivity.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -90,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
-
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
@@ -124,20 +126,17 @@ public class MainActivity extends AppCompatActivity {
             DocumentReference usersRef;
             usersRef = db.collection("users").document(Objects.requireNonNull(personEmail));
             usersRef.get().addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot docSnap = task.getResult();
                     assert docSnap != null;
-                    if(docSnap.exists()){
+                    if (docSnap.exists()) {
                         startActivity(new Intent(MainActivity.this, HomePage.class));
-                    }
-                    else{
+                    } else {
                         startActivity(new Intent(MainActivity.this, RegistrationPage.class));
                     }
                 }
             });
         }
     }
-
 }
-
 
