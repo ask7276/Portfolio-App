@@ -1,4 +1,4 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -178,6 +180,8 @@ public class RegistrationPage extends AppCompatActivity {
                         mdata.put("LinkedIn", linkedin.getText().toString());
                         mdata.put("checkboxes", check);
                         mdata.put("ImageUrl", url);
+                        ArrayList<String> notif = new ArrayList<>();
+                        mdata.put("Notif", notif);
                         db.collection("users").document(personEmail).set(mdata);
                         Toast.makeText(RegistrationPage.this, "Registered", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegistrationPage.this, HomePage.class));

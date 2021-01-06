@@ -1,4 +1,4 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,9 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
+import com.example.portfolioapp.R;
 import com.example.portfolioapp.ui.main.SectionsPagerAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,60 +37,63 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_home_page);
 
+        // toolbar and BaseClass1 code
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //google initializations
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+        // 2 tabs initializations
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager2);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs2);
         tabs.setupWithViewPager(viewPager);
+
+        // on click listeners
         fab = findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
-            startActivity(new Intent(HomePage.this,NewProject.class));
-        });
+        fab.setOnClickListener(v -> startActivity(new Intent(HomePage.this,NewProject.class)));
     }
 
-
+    // methods over ridden for menu item inflating
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_file, menu);
+        getMenuInflater().inflate(R.menu.menu_file1, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == R.id.sign_out_button) {
-            mAuth.signOut();
-            mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                    task -> {
-                        Toast.makeText(HomePage.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(HomePage.this, MainActivity.class));
-                    }
-            );
-        } else if (item.getItemId() == R.id.user_profile_button) {
-            startActivity(new Intent(HomePage.this, ProfilePage.class));
+        if (item.getItemId() == R.id.notifications) {
+            startActivity(new Intent(HomePage.this, NotificationPage.class));
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    // method over ridden for BaseClass1 settings
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_home) {

@@ -5,31 +5,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.portfolioapp.FaqPage;
-import com.example.portfolioapp.MyRecyclerViewAdapter;
-import com.example.portfolioapp.ProjectInfo;
+import com.example.portfolioapp.Models.Project;
+import com.example.portfolioapp.ProjectAdapter;
+import com.example.portfolioapp.Activities.ProjectInfo;
 import com.example.portfolioapp.R;
 import com.example.portfolioapp.RecyclerItemClickListener;
-import com.example.portfolioapp.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -40,12 +33,9 @@ public class PlaceholderFragment extends Fragment {
 
     FirebaseFirestore db;
     RecyclerView mRecyclerView;
-    ArrayList<User> userArrayList;
-    private FirebaseAuth mAuth;
-    MyRecyclerViewAdapter adapter;
-
-
-    private PageViewModel pageViewModel;
+    ArrayList<Project> userArrayList;
+    FirebaseAuth mAuth;
+    ProjectAdapter adapter;
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -73,66 +63,46 @@ public class PlaceholderFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_main2, container, false);
 
         userArrayList = new ArrayList<>();
-        mRecyclerView = root.findViewById(R.id.mRecyclerView);
+        mRecyclerView = root.findViewById(R.id.project_list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        if (userArrayList.size()>0)
+        if (userArrayList.size() > 0)
             userArrayList.clear();
 
-        int x=1;
-        if(getArguments() != null){
+        int x = 1;
+        if (getArguments() != null) {
             x = getArguments().getInt(ARG_SECTION_NUMBER);
         }
-        if(x==1){
+        if (x == 1) {
             db.collection("projects")
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for(DocumentSnapshot querySnapshot : task.getResult()){
-                                User user = new User(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
-                                userArrayList.add(user);
-                            }
-                            adapter = new MyRecyclerViewAdapter(root.getContext(), userArrayList);
-                            mRecyclerView.setAdapter(adapter);
+                    .addOnCompleteListener(task -> {
+                        for (DocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
+                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
+                            userArrayList.add(project);
                         }
+                        adapter = new ProjectAdapter(root.getContext(), userArrayList);
+                        mRecyclerView.setAdapter(adapter);
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(root.getContext(), "fbrefg", Toast.LENGTH_SHORT).show();
-                        }
-
-                    });
+                    .addOnFailureListener(e -> Toast.makeText(root.getContext(), "fbrefg", Toast.LENGTH_SHORT).show());
 
 
-
-        }
-        else{
+        } else {
             db.collection("projects")
-                    .whereEqualTo("Email", mAuth.getCurrentUser().getEmail())
+                    .whereEqualTo("Email", Objects.requireNonNull(mAuth.getCurrentUser()).getEmail())
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for(DocumentSnapshot querySnapshot : task.getResult()){
-                                User user = new User(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
-                                userArrayList.add(user);
-                            }
-                            adapter = new MyRecyclerViewAdapter(root.getContext(), userArrayList);
-                            mRecyclerView.setAdapter(adapter);
+                    .addOnCompleteListener(task -> {
+                        for (DocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
+                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
+                            userArrayList.add(project);
                         }
+                        adapter = new ProjectAdapter(root.getContext(), userArrayList);
+                        mRecyclerView.setAdapter(adapter);
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(root.getContext(), "fbrefg", Toast.LENGTH_SHORT).show();
-                        }
-
-                    });
+                    .addOnFailureListener(e -> Toast.makeText(root.getContext(), "fbrefg", Toast.LENGTH_SHORT).show());
         }
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(root.getContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
@@ -154,10 +124,6 @@ public class PlaceholderFragment extends Fragment {
 //        final TextView textView = root.findViewById(R.id.section_label2);
 //        pageViewModel.getText().observe(this, textView::setText);
         return root;
-    }
-
-    private void loadfromFirebase() {
-
     }
 
 

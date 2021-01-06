@@ -1,13 +1,13 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.Models;
 
-public class User {
+public class Project {
     private String Project_Title, Email;
 
-    public User(){
+    public Project(){
 
     }
 
-    public User(String project_Title, String email) {
+    public Project(String project_Title, String email) {
         Project_Title = project_Title;
         Email = email;
     }

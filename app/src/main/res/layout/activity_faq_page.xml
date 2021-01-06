@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FaqPage">
+    tools:context=".Activities.FaqPage">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="150dp"
-        android:id="@+id/mRecyclerView"
+        android:id="@+id/project_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -17,31 +17,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PortfolioApp">
         <activity
-            android:name=".EditProject"
+            android:name=".Activities.NotificationPage"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".ApplicantsList"
+            android:name=".Activities.EditProject"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".ProjectInfo"
+            android:name=".Activities.ApplicantsList"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".NewProject"
+            android:name=".Activities.ProjectInfo"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".FaqPage"
+            android:name=".Activities.NewProject"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".EditProfile"
+            android:name=".Activities.FaqPage"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".ProfilePage"
+            android:name=".Activities.EditProfile"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
         <activity
-            android:name=".HomePage"
+            android:name=".Activities.ProfilePage"
             android:theme="@style/Theme.PortfolioApp.NoActionBar" />
-        <activity android:name=".RegistrationPage" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Activities.HomePage"
+            android:theme="@style/Theme.PortfolioApp.NoActionBar" />
+        <activity android:name=".Activities.RegistrationPage" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
