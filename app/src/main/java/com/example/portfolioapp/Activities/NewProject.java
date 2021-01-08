@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.portfolioapp.Activities.BaseClass.BaseClass;
@@ -23,7 +24,8 @@ import java.util.Objects;
 
 public class NewProject extends BaseClass {
 
-    EditText title, email, org_team, desc, perks, members;
+    EditText title, org_team, desc, perks, members;
+    TextView email;
     CheckBox c1, c2, c3, c4, c5, c6, c7, c8;
     Button button;
 
@@ -63,6 +65,8 @@ public class NewProject extends BaseClass {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+
+        email.setText(personEmail);
 
         button.setOnClickListener(v -> submit());
     }
@@ -113,7 +117,7 @@ public class NewProject extends BaseClass {
 
     private void submit() {
         if (!title.getText().toString().equals("") && !email.getText().toString().equals("") && !org_team.getText().toString().equals("") &&
-                !desc.getText().toString().equals("") && !perks.getText().toString().equals("") && !members.getText().toString().equals("") && checking()) {
+                !desc.getText().toString().equals("") && !perks.getText().toString().equals("") && checking()) {
             Map<String, Object> mdata = new HashMap<>();
             mdata.put("Title", title.getText().toString());
             mdata.put("Email", email.getText().toString());
@@ -122,7 +126,6 @@ public class NewProject extends BaseClass {
             mdata.put("Perks", perks.getText().toString());
             mdata.put("Members", members.getText().toString());
             mdata.put("Checkboxes", check);
-            mdata.put("Owner", Objects.requireNonNull(mAuth.getCurrentUser()).getEmail());
             mdata.put("Applicants", "");
             db.collection("projects").document(email.getText().toString() + " " + title.getText().toString()).set(mdata);
 
@@ -134,7 +137,7 @@ public class NewProject extends BaseClass {
                             Map<String, Boolean> check2 = (Map<String, Boolean>) querySnapshot.get("checkboxes");
                             assert check2 != null;
                             for (String key : check2.keySet()) {
-                                if (check2.get(key) == (Boolean) true && check.get(key) && !personEmail.equals(querySnapshot.getString("Owner"))) {
+                                if (check2.get(key) == (Boolean) true && check.get(key) && !personEmail.equals(querySnapshot.getString("Email"))) {
                                     String notification;
                                     notification = "New project named " + title.getText().toString()
                                             + " was posted with requirements matching your skills";

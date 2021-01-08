@@ -177,7 +177,7 @@ public class ProjectInfo extends BaseClass {
 
     private void notifs() {
         db.collection("users")
-                .document(Objects.requireNonNull(data.get("Owner")).toString())
+                .document(Objects.requireNonNull(data.get("Email")).toString())
                 .get()
                 .addOnCompleteListener(task -> {
                     DocumentSnapshot documentSnapshot = task.getResult();
@@ -194,10 +194,7 @@ public class ProjectInfo extends BaseClass {
                                         name2 = (String) documentSnapshot1.get("Name");
                                         String notification = name2 + " (" + personEmail + ")" + " has applied to your project " + name.getText().toString();
                                         notifss.add(notification);
-                                        if (notifss != null) {
-                                            Toast.makeText(ProjectInfo.this, "vdfb", Toast.LENGTH_SHORT).show();
-                                        }
-                                        db.collection("users").document(Objects.requireNonNull(data.get("Owner")).toString())
+                                        db.collection("users").document(Objects.requireNonNull(data.get("Email")).toString())
                                                 .update("Notif", notifss);
                                     }
                                 });
