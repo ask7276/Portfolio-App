@@ -8,10 +8,11 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.Models.User;
 import com.example.portfolioapp.R;
-import com.example.portfolioapp.RecyclerItemClickListener;
-import com.example.portfolioapp.UserAdapter;
+import com.example.portfolioapp.RecyclerItemClickListener.RecyclerItemClickListener;
+import com.example.portfolioapp.RecyclerViewAdapter.UserAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -22,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ApplicantsList extends BaseClass1 {
+public class ApplicantsList extends BaseClass {
 
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
@@ -81,19 +82,19 @@ public class ApplicantsList extends BaseClass1 {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(View view, int position) {
-                Bundle b = new Bundle();
-                b.putString("Email", userArrayList.get(position).getEmail());
-                Intent intent = new Intent(ApplicantsList.this, ProfilePage.class);
-                intent.putExtras(b);
-                startActivity(intent);
-            }
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Bundle b = new Bundle();
+                        b.putString("Email", userArrayList.get(position).getEmail());
+                        Intent intent = new Intent(ApplicantsList.this, ProfilePage.class);
+                        intent.putExtras(b);
+                        startActivity(intent);
+                    }
 
-            @Override
-            public void onLongItemClick(View view, int position) {
+                    @Override
+                    public void onLongItemClick(View view, int position) {
 
-            }
-        }));
+                    }
+                }));
     }
 }

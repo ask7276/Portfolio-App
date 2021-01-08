@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,17 +24,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditProfile extends BaseClass1{
+public class EditProfile extends BaseClass {
 
-    EditText name,org_name, linkedin;
-    CheckBox c1, c2,c3, c4,c5, c6,c7,c8;
+    EditText name, org_name, linkedin;
+    CheckBox c1, c2, c3, c4, c5, c6, c7, c8;
     Button update_button;
     TextView email;
 
     String personEmail;
     Map<String, Object> data;
     Map<String, Boolean> check = new HashMap<>();
-    int count=0;
+    int count = 0;
 
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -65,22 +66,21 @@ public class EditProfile extends BaseClass1{
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        personEmail= Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
+        personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
 
         db.collection("users").document(Objects.requireNonNull(personEmail))
                 .get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 DocumentSnapshot docSnap = task.getResult();
                 assert docSnap != null;
-                if(docSnap.exists()){
+                if (docSnap.exists()) {
                     data = docSnap.getData();
                     assert data != null;
                     name.setText(Objects.requireNonNull(data.get("Name")).toString());
                     email.setText(Objects.requireNonNull(data.get("Email")).toString());
                     linkedin.setText(Objects.requireNonNull(data.get("LinkedIn")).toString());
                     org_name.setText(Objects.requireNonNull(data.get("Organisation Name")).toString());
-                }
-                else{
+                } else {
                     startActivity(new Intent(EditProfile.this, MainActivity.class));
                 }
             }
@@ -89,7 +89,7 @@ public class EditProfile extends BaseClass1{
         update_button.setOnClickListener(v -> updatedoc());
     }
 
-    private boolean checking(){
+    private boolean checking() {
         check.put("Java/Kotlin", false);
         check.put("Flutter", false);
         check.put("React Native", false);
@@ -103,38 +103,45 @@ public class EditProfile extends BaseClass1{
             count++;
         }
         if (c2.isChecked()) {
-            check.put("Flutter", true);count++;
+            check.put("Flutter", true);
+            count++;
         }
         if (c3.isChecked()) {
-            check.put("React Native", true);count++;
+            check.put("React Native", true);
+            count++;
         }
         if (c4.isChecked()) {
-            check.put("Django", true);count++;
+            check.put("Django", true);
+            count++;
         }
         if (c5.isChecked()) {
-            check.put("NodeJs", true);count++;
+            check.put("NodeJs", true);
+            count++;
         }
         if (c6.isChecked()) {
-            check.put("ReactJs", true);count++;
+            check.put("ReactJs", true);
+            count++;
         }
         if (c7.isChecked()) {
-            check.put("OpenCV", true);count++;
+            check.put("OpenCV", true);
+            count++;
         }
         if (c8.isChecked()) {
-            check.put("NLP", true);count++;
+            check.put("NLP", true);
+            count++;
         }
         return count != 0;
     }
 
-    public void updatedoc(){
-        if(checking()){
-            if(!name.getText().toString().trim().equals("")){
+    public void updatedoc() {
+        if (checking()) {
+            if (!name.getText().toString().trim().equals("")) {
                 data.put("Name", name.getText().toString());
             }
-            if(!org_name.getText().toString().trim().equals("")){
+            if (!org_name.getText().toString().trim().equals("")) {
                 data.put("Organisation Name", org_name.getText().toString());
             }
-            if(!linkedin.getText().toString().trim().equals("")){
+            if (!linkedin.getText().toString().trim().equals("")) {
                 data.put("LinkedIn", linkedin.getText().toString());
             }
 
@@ -142,8 +149,7 @@ public class EditProfile extends BaseClass1{
             db.collection("users").document(personEmail).set(data);
             Toast.makeText(EditProfile.this, "Updated", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(EditProfile.this, HomePage.class));
-        }
-        else{
+        } else {
             Toast.makeText(EditProfile.this, "Select atleast one proficiency", Toast.LENGTH_SHORT).show();
         }
     }

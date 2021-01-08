@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -17,10 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:text="Name:"
+            android:text="@string/Name"
             android:textColor="#000000"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,8 +37,8 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:autofillHints="name"
-            android:hint="name"
-            android:inputType="text"
+            android:hint="@string/name"
+            android:inputType="textCapWords"
             android:maxLength="15"
             android:textSize="20sp" />
 
@@ -51,7 +50,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:text="Email:"
+            android:text="@string/Email"
             android:textColor="#000000"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +77,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:text="Organization Name:"
+            android:text="@string/Organization_Name"
             android:textColor="#000000"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -95,8 +94,9 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:hint="college name"
-            android:inputType="text"
+            android:autofillHints="Organization Name"
+            android:hint="@string/organization_name"
+            android:inputType="textCapWords"
             android:textSize="20sp" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:text="LinkedIn Profile:"
+            android:text="@string/Linkedin_Profile"
             android:textColor="#000000"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +124,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:hint="url"
+            android:autofillHints="url"
+            android:hint="@string/url"
             android:inputType="text"
             android:textSize="20sp" />
 
@@ -260,7 +261,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="60dp" />
 
 
     </LinearLayout>

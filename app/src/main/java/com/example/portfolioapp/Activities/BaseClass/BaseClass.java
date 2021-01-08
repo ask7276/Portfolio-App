@@ -1,4 +1,4 @@
-package com.example.portfolioapp.Activities;
+package com.example.portfolioapp.Activities.BaseClass;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +14,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.portfolioapp.Activities.FaqPage;
+import com.example.portfolioapp.Activities.HomePage;
+import com.example.portfolioapp.Activities.MainActivity;
+import com.example.portfolioapp.Activities.NotificationPage;
+import com.example.portfolioapp.Activities.ProfilePage;
 import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,7 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
-public class BaseClass1 extends AppCompatActivity {
+public class BaseClass extends AppCompatActivity {
 
     public DrawerLayout drawer;
     public FrameLayout frameLayout;
@@ -44,7 +49,7 @@ public class BaseClass1 extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         personEmail = Objects.requireNonNull(mAuth.getCurrentUser()).getEmail();
 
-        drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.act, null);
+        drawer = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base_class, null);
         frameLayout = (FrameLayout) drawer.findViewById(R.id.fragment_container);
 
         getLayoutInflater().inflate(layoutResID, frameLayout, true);
@@ -61,24 +66,21 @@ public class BaseClass1 extends AppCompatActivity {
         NavigationView navigationView = drawer.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_home) {
-                startActivity(new Intent(BaseClass1.this, HomePage.class));
+                startActivity(new Intent(BaseClass.this, HomePage.class));
                 drawer.closeDrawer(GravityCompat.START);
-            }
-            else if (item.getItemId() == R.id.nav_profile) {
-                startActivity(new Intent(BaseClass1.this, ProfilePage.class));
+            } else if (item.getItemId() == R.id.nav_profile) {
+                startActivity(new Intent(BaseClass.this, ProfilePage.class));
                 drawer.closeDrawer(GravityCompat.START);
-            }
-            else if (item.getItemId() == R.id.nav_faq) {
-                startActivity(new Intent(BaseClass1.this, FaqPage.class));
+            } else if (item.getItemId() == R.id.nav_faq) {
+                startActivity(new Intent(BaseClass.this, FaqPage.class));
                 drawer.closeDrawer(GravityCompat.START);
-            }
-            else if (item.getItemId() == R.id.nav_logout) {
+            } else if (item.getItemId() == R.id.nav_logout) {
                 mAuth.signOut();
                 mGoogleSignInClient.signOut().addOnCompleteListener(this,
                         task -> {
-                            Toast.makeText(BaseClass1.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BaseClass.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(new Intent(BaseClass1.this, MainActivity.class));
+                            startActivity(new Intent(BaseClass.this, MainActivity.class));
                         }
                 );
             }
@@ -88,7 +90,7 @@ public class BaseClass1 extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_file2, menu);
+        getMenuInflater().inflate(R.menu.app_menu, menu);
         return true;
     }
 
@@ -96,7 +98,7 @@ public class BaseClass1 extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.notifications) {
-            startActivity(new Intent(BaseClass1.this, NotificationPage.class));
+            startActivity(new Intent(BaseClass.this, NotificationPage.class));
         }
 
         return super.onOptionsItemSelected(item);

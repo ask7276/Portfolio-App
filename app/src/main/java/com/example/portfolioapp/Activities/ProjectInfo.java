@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ProjectInfo extends BaseClass1 {
+public class ProjectInfo extends BaseClass {
 
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;

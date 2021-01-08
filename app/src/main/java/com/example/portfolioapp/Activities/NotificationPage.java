@@ -5,9 +5,10 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.Models.Notification;
-import com.example.portfolioapp.NotificationAdapter;
 import com.example.portfolioapp.R;
+import com.example.portfolioapp.RecyclerViewAdapter.NotificationAdapter;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -16,10 +17,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-public class NotificationPage extends BaseClass1 {
+public class NotificationPage extends BaseClass {
 
     GoogleSignInClient mGoogleSignInClient;
     public FirebaseAuth mAuth;
@@ -51,7 +53,7 @@ public class NotificationPage extends BaseClass1 {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        if (notificationArrayList.size()>0) {
+        if (notificationArrayList.size() > 0) {
             notificationArrayList.clear();
         }
         notifs = new ArrayList<>();
@@ -62,16 +64,18 @@ public class NotificationPage extends BaseClass1 {
                 .addOnCompleteListener(task -> {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     assert documentSnapshot != null;
-                    if(documentSnapshot.exists()){
+                    if (documentSnapshot.exists()) {
                         Map m = documentSnapshot.getData();
                         assert m != null;
                         notifs = (ArrayList<String>) m.get("Notif");
                         assert notifs != null;
-                        for(String note: notifs){
+                        for (String note : notifs) {
                             Notification notification = new Notification(note);
                             notificationArrayList.add(notification);
                         }
-                        if(notificationArrayList.size() > 0){
+
+                        if (notificationArrayList.size() > 0) {
+                            Collections.reverse(notificationArrayList);
                             adapter = new NotificationAdapter(NotificationPage.this, notificationArrayList);
                             mRecyclerView.setAdapter(adapter);
                         }

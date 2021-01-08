@@ -9,14 +9,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.portfolioapp.Models.Project;
-import com.example.portfolioapp.ProjectAdapter;
 import com.example.portfolioapp.Activities.ProjectInfo;
+import com.example.portfolioapp.Models.Project;
 import com.example.portfolioapp.R;
-import com.example.portfolioapp.RecyclerItemClickListener;
+import com.example.portfolioapp.RecyclerItemClickListener.RecyclerItemClickListener;
+import com.example.portfolioapp.RecyclerViewAdapter.ProjectAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +31,8 @@ import java.util.Objects;
 public class PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    PageViewModel pageViewModel;
 
     FirebaseFirestore db;
     RecyclerView mRecyclerView;
@@ -48,7 +51,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        pageViewModel = new ViewModelProvider(this).get(PageViewModel.class);
 //        int index = 1;
 //        if (getArguments() != null) {
 //            index = getArguments().getInt(ARG_SECTION_NUMBER);
@@ -60,7 +63,7 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main2, container, false);
+        View root = inflater.inflate(R.layout.home_fragment, container, false);
 
         userArrayList = new ArrayList<>();
         mRecyclerView = root.findViewById(R.id.project_list);
@@ -81,7 +84,7 @@ public class PlaceholderFragment extends Fragment {
                     .get()
                     .addOnCompleteListener(task -> {
                         for (DocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
-                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
+                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"), querySnapshot.getString("Description"));
                             userArrayList.add(project);
                         }
                         adapter = new ProjectAdapter(root.getContext(), userArrayList);
@@ -96,7 +99,7 @@ public class PlaceholderFragment extends Fragment {
                     .get()
                     .addOnCompleteListener(task -> {
                         for (DocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
-                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"));
+                            Project project = new Project(querySnapshot.getString("Title"), querySnapshot.getString("Email"), querySnapshot.getString("Description"));
                             userArrayList.add(project);
                         }
                         adapter = new ProjectAdapter(root.getContext(), userArrayList);

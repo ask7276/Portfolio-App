@@ -1,4 +1,4 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.RecyclerViewAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portfolioapp.Models.Notification;
+import com.example.portfolioapp.R;
 
 import java.util.ArrayList;
 

@@ -1,5 +1,6 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.RecyclerViewAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,29 +11,27 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portfolioapp.Models.Project;
+import com.example.portfolioapp.R;
 
 import java.util.ArrayList;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectRecyclerViewHolder> {
 
-    Context context;
-    ArrayList<Project> userArrayList;
+    private Context context;
+    private ArrayList<Project> userArrayList;
 
     public ProjectAdapter(Context context, ArrayList<Project> userArrayList) {
         this.context = context;
         this.userArrayList = userArrayList;
     }
 
-    public class ProjectRecyclerViewHolder extends RecyclerView.ViewHolder {
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onBindViewHolder(@NonNull ProjectRecyclerViewHolder holder, int position) {
 
-        public TextView name, email;
-
-        public ProjectRecyclerViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            name = itemView.findViewById(R.id.pro_name2);
-            email = itemView.findViewById(R.id.pro_email2);
-        }
+        holder.name.setText(userArrayList.get(position).getProject_Title());
+        holder.email.setText("Email: " + userArrayList.get(position).getEmail());
+        holder.desc.setText("Description: " + userArrayList.get(position).getDesc());
     }
 
     @NonNull
@@ -43,11 +42,17 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectR
         return new ProjectRecyclerViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ProjectRecyclerViewHolder holder, int position) {
+    public class ProjectRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-        holder.name.setText(userArrayList.get(position).getProject_Title());
-        holder.email.setText(userArrayList.get(position).getEmail());
+        public TextView name, email, desc;
+
+        public ProjectRecyclerViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            name = itemView.findViewById(R.id.pro_name2);
+            email = itemView.findViewById(R.id.pro_email2);
+            desc = itemView.findViewById(R.id.pro_desc2);
+        }
     }
 
     @Override

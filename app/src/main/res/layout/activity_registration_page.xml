@@ -32,16 +32,16 @@
             android:id="@+id/input_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:maxLength="15"
-            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:autofillHints="name"
             android:hint="name"
             android:inputType="text"
-            android:autofillHints="name" />
+            android:maxLength="15"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,12 +63,12 @@
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:textSize="20sp"/>
+            android:layout_marginRight="20dp"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,14 +90,14 @@
             android:id="@+id/input_organization_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:textSize="20sp"
+            android:layout_marginRight="20dp"
             android:hint="college name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -119,14 +119,14 @@
             android:id="@+id/input_linkedin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:textSize="20sp"
+            android:layout_marginRight="20dp"
             android:hint="url"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,10 +134,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:textStyle="italic"
             android:text="Please keep your linkedin profile updated with all certificates and previous projects done."
             android:textColor="#000000"
             android:textSize="14sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,10 +165,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:textStyle="italic"
             android:text="Select those apply"
             android:textColor="#000000"
             android:textSize="14sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -178,73 +178,73 @@
             android:id="@+id/check_android_java"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="Java/Kotlin"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_android_flutter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="Flutter"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_android_react"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="React Native"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_web_django"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="Django"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_web_nodejs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="NodeJs"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_web_frontend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="ReactJs"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_opencv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="OpenCV"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <CheckBox
             android:id="@+id/check_nlp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:text="NLP"
-            android:textSize="20sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
 
         <TextView
@@ -266,16 +266,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/input_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="select image"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp" />
+                android:layout_marginTop="10dp"
+                android:text="select image" />
 
             <TextView
                 android:id="@+id/input_image_name"
@@ -284,7 +284,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:text=""
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
 
         </LinearLayout>
@@ -292,16 +292,15 @@
 
         <Button
             android:id="@+id/submit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SUBMIT"
-            android:textSize="26sp"
             android:layout_marginLeft="85dp"
-            android:layout_marginRight="85dp"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="85dp"
             android:layout_marginBottom="50dp"
             android:background="@color/teal_200"
-            android:layout_width="match_parent" />
-
+            android:text="SUBMIT"
+            android:textSize="26sp" />
 
 
     </LinearLayout>

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -18,14 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:autofillHints="name"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/holo_blue_bright"
-            android:autofillHints="name"
             android:maxLength="15"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="30sp" />
 
         <TextView
@@ -53,10 +52,10 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="20sp"
-            android:hint="email"
             android:autofillHints="email"
-            android:inputType="textEmailAddress" />
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,10 +82,10 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:textSize="20sp"
             android:autofillHints="team"
             android:hint="team"
-            android:inputType="text" />
+            android:inputType="textCapWords"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,11 +112,11 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:hint="description"
-            android:maxLength="1000"
-            android:textSize="20sp"
             android:autofillHints="description"
-            android:inputType="text" />
+            android:hint="description"
+            android:inputType="textCapSentences"
+            android:maxLength="1000"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -232,11 +231,11 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:maxLength="1000"
-            android:textSize="20sp"
-            android:hint="perks"
             android:autofillHints="perks"
-            android:inputType="text" />
+            android:hint="perks"
+            android:inputType="textCapSentences"
+            android:maxLength="1000"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -263,26 +262,26 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:maxLength="1000"
-            android:textSize="20sp"
-            android:hint="members"
             android:autofillHints="members"
-            android:inputType="text" />
+            android:hint="members"
+            android:inputType="text"
+            android:maxLength="1000"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/proj_submit2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="50dp"
             android:background="@color/teal_200"
             android:text="SUBMIT"
-            android:textSize="26sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="26sp" />
 
     </LinearLayout>
 

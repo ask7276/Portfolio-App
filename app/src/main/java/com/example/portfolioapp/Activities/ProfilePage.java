@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ProfilePage extends BaseClass1 {
+public class ProfilePage extends BaseClass {
 
     private TextView name, email, org_name, linkedin, proficiency;
     private ImageView mImage;

@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/profile_name"
@@ -18,14 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:autofillHints="name"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/holo_blue_bright"
-            android:autofillHints="name"
             android:maxLength="15"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="28sp" />
 
         <TextView
@@ -184,8 +183,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            tools:ignore="ContentDescription"
-            android:src="@mipmap/baseline_account_circle_black_36"/>
+            android:src="@mipmap/baseline_account_circle_black_36"
+            tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/update"
@@ -201,7 +200,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"/>
+            android:layout_height="60dp" />
 
     </LinearLayout>
 </ScrollView>

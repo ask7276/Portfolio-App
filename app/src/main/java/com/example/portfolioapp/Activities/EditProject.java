@@ -8,8 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import com.example.portfolioapp.Activities.BaseClass.BaseClass;
 import com.example.portfolioapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class EditProject extends BaseClass1{
+public class EditProject extends BaseClass {
 
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
@@ -36,8 +35,6 @@ public class EditProject extends BaseClass1{
     EditText email, team, desc, perks, members;
     Button button;
     CheckBox c1, c2, c3, c4, c5, c6, c7, c8;
-
-    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +90,7 @@ public class EditProject extends BaseClass1{
         button.setOnClickListener(v -> submit());
     }
 
-    int count=0;
+    int count = 0;
     Map<String, Boolean> check = new HashMap<>();
 
     private boolean checking() {

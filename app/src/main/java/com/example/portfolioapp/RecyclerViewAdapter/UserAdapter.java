@@ -1,5 +1,6 @@
-package com.example.portfolioapp;
+package com.example.portfolioapp.RecyclerViewAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.portfolioapp.Models.User;
+import com.example.portfolioapp.R;
 
 import java.util.ArrayList;
 
@@ -40,9 +42,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserRecyclerVi
         return new UserRecyclerViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull UserRecyclerViewHolder holder, int position) {
-        holder.email.setText(userArrayList.get(position).getEmail());
+        holder.email.setText("User: " + userArrayList.get(position).getEmail());
     }
 
     @Override

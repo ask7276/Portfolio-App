@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
@@ -18,14 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:autofillHints="name"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/holo_blue_bright"
-            android:autofillHints="name"
             android:maxLength="15"
+            android:textColor="@android:color/holo_blue_bright"
             android:textSize="30sp" />
 
         <TextView
@@ -109,8 +108,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Description"
             android:maxLength="1000"
+            android:text="Description"
             android:textSize="20sp" />
 
         <TextView
@@ -138,8 +137,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Proficiency"
             android:maxLength="1000"
+            android:text="Proficiency"
             android:textSize="20sp" />
 
         <TextView
@@ -167,8 +166,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="perks"
             android:maxLength="1000"
+            android:text="perks"
             android:textSize="20sp" />
 
         <TextView
@@ -196,42 +195,40 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="members"
             android:maxLength="1000"
+            android:text="members"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/proj_submit"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
             android:background="@color/teal_200"
             android:text="SUBMIT"
-            android:textSize="26sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/x1"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="60dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="60dp"
             android:background="@color/teal_200"
             android:text="SUBMIT"
-            android:textSize="26sp"
-            android:layout_marginStart="20dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
-
 
 
 </ScrollView>

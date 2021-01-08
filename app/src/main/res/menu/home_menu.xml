@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search_item"
         android:icon="@mipmap/ic_search"
-        android:title="@string/my_profile"
         android:tint="@android:color/white"
+        android:title="@string/my_profile"
         app:showAsAction="always" />
     <item
         android:id="@+id/notifications"
