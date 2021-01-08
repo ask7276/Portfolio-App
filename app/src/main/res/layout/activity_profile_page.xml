@@ -23,7 +23,6 @@
             android:autofillHints="name"
             android:fontFamily="sans-serif-black"
             android:gravity="center_horizontal"
-            android:maxLength="15"
             android:textColor="@android:color/holo_blue_bright"
             android:textSize="28sp" />
 
