@@ -6,13 +6,8 @@ Most times someone wants to gather a team for startup with specific requirments 
 
 New users can create a profile using Gmail ID and register their skills, ID card photo, and some other details. Already registered users can login to their Accounts. 
 
-<img src="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" alt="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" width="300"/>
-
-| ![](https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg =100x100) | ![](https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg) |
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| <img src="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" alt="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" width="300" >  | <img src="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" alt="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" width="300"/>  |
+<img src="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" alt="https://github.com/ask7276/Portfolio-App/blob/master/Images/1.jpeg" width="300" height="600">                     
+![](https://github.com/ask7276/Portfolio-App/blob/master/Images/2.mp4)
 
 Users can visit their profile and can edit it.
 
